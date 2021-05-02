@@ -5,12 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve --open"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "mdb-vue-ui-kit": "^1.0.0-beta3",
     "vue": "^3.0.0",
+    "vue-i18n": "^9.1.6",
     "vue-router": "^4.0.0-0",
+    "vue-spinner": "^1.0.4",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
@@ -31,6 +35,7 @@
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "vue-cli-plugin-mdb5": "~1.2.0"
   }
 }
