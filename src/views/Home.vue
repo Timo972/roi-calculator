@@ -1,40 +1,10 @@
 <template>
     <div class="home">
-        <!--<MDBContainer>
-            <div
-                class="d-flex justify-content-center align-items-center"
-                style="height: 100vh"
-            >
-                <div class="text-center">
-                    <img
-                        class="mb-4"
-                        src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png"
-                        style="width: 250px; height: 90px"
-                    />
-                    <h5 class="mb-3">{{ msg }}</h5>
-                    <p class="mb-3">MDB Team</p>
-                    <p class="mt-5 mb-3">
-                        PS. We'll be releasing "How to build your first project
-                        with MDB 5 Vue" tutorial soon. Make sure to join our
-                        newsletter not to miss it!
-                    </p>
-                    <a
-                        class="btn btn-primary btn-lg"
-                        href="https://mdbootstrap.com/newsletter/"
-                        target="_blank"
-                        role="button"
-                        >Join now</a
-                    >
-                </div>
-            </div>
-        </MDBContainer>-->
-        <MDBContainer>
+        <div class="p-grid">
             <div class="header">
                 <img alt="Vue logo" src="../assets/logo.png" />
             </div>
-            <div
-                class="d-flex flex-column justify-content-center align-items-center"
-            >
+            <div class="p-col-12 p-md-6 p-fluid">
                 <div class="d-flex flex-row">
                     <div class="form-outline">
                         <input
@@ -47,11 +17,17 @@
                             $t('powerusage')
                         }}</label>
                     </div>
-                    <select-box
+                    <!--<select-box
                         :options="powerUsageUnits"
                         :default="powerUsageUnit"
                         :title="$t('powerUnit')"
                         @input="changePowerUnit"
+                    />-->
+                    <Dropdown
+                        v-model="powerUsageUnit"
+                        :options="powerUsageUnits"
+                        optionLabel="name"
+                        placeholder="Select"
                     />
                 </div>
                 <div class="d-flex flex-row">
@@ -103,9 +79,7 @@
                             $t('electricitycosts')
                         }}</label>
                     </div>
-                    <MDBBtn class="btn btn-primary btn-lg" @click="calculate">
-                        {{ $t('calculate') }}
-                    </MDBBtn>
+                    <Button @click="calculate" :label="$t('calculate')" />
                 </div>
                 <div class="d-flex flex-row res-grid">
                     <div class="form-outline">
@@ -121,13 +95,18 @@
                         }}</label>
                     </div>
                     <div class="form-outline">
-                        <input
+                        <!--<input
                             id="mec"
                             class="form-control"
                             type="number"
                             readonly
                             v-model="monthlyElecCosts"
-                        />
+                        />-->
+                        <InputNumber
+                            id="mec"
+                            v-model="monthlyElecCosts"
+                            mode="decimal"
+                        ></InputNumber>
                         <label class="form-label" for="mec">{{
                             $t('monthlyeleccots')
                         }}</label>
@@ -170,7 +149,7 @@
                     </div>
                 </div>
             </div>
-        </MDBContainer>
+        </div>
     </div>
 </template>
 
@@ -178,22 +157,18 @@
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import { defineComponent, onMounted, ref, watch } from 'vue'
-//@ts-expect-error no typings
-import { MDBContainer, MDBBtn } from 'mdb-vue-ui-kit'
-import SelectBox from '@/components/SelectBox.vue'
+//import SelectBox from '@/components/SelectBox.vue'
 
 export default defineComponent({
     name: 'Home',
     components: {
-        SelectBox,
-        MDBContainer,
-        MDBBtn,
+        //SelectBox,
     },
     setup() {
         const store = useStore()
         const i18n = useI18n()
 
-        const powerUsageUnits = ['watt', 'kwh']
+        const powerUsageUnits = ref(['watt', 'kwh'])
 
         const powerUsage = ref(300)
         const powerUsageUnit = ref('watt')

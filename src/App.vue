@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts">
-import 'mdb-vue-ui-kit/css/mdb.min.css'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "mdb-vue-ui-kit": "^1.0.0-beta3",
+    "primeicons": "^4.1.0",
+    "primevue": "^3.3.5",
     "vue": "^3.0.0",
     "vue-i18n": "^9.1.6",
     "vue-router": "^4.0.0-0",
@@ -35,7 +36,6 @@
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "typescript": "~4.1.5",
-    "vue-cli-plugin-mdb5": "~1.2.0"
+    "typescript": "~4.1.5"
   }
 }
