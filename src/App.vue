@@ -1,25 +1,21 @@
 <template>
-    <router-view />
+    <v-app>
+        <v-main>
+            <router-view />
+        </v-main>
+    </v-app>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    setup() {
-        return {}
+    name: 'App',
+
+    data() {
+        return {
+            //
+        }
     },
 })
 </script>
-
-
-<style lang="scss">
-html,
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    height: 100vh;
-    width: 100vw;
-}
-</style>

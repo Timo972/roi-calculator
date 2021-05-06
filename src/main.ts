@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
+import vuetify from './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import lang from './lang'
 
-const app = createApp(App)
-
-app.use(store)
+createApp(App)
     .use(router)
+    .use(store)
     .use(lang)
+    .use(vuetify)
     .mount('#app')
