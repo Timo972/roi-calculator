@@ -1,16 +1,16 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
+    <v-col cols="3" sm="8" md="8">
+      <!--<div class="text-center">
         <logo />
         <vuetify-logo />
-      </div>
-      <v-card>
+      </div>-->
+      <v-card class="mb-2">
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          {{ $t('power_data') }}
         </v-card-title>
         <v-card-text>
-          <p>
+          <!--<p>
             Vuetify is a progressive Material Design component framework for
             Vue.js. It was designed to empower developers to create amazing
             applications.
@@ -69,25 +69,88 @@
             rel="noopener noreferrer"
           >
             Nuxt GitHub
-          </a>
+          </a>-->
+          <v-row>
+            <v-col sm="2" md="8">
+              <v-text-field :label="$t('power_usage')" outlined></v-text-field>
+            </v-col>
+            <v-col sm="2" md="4">
+              <v-select
+                :items="dropdown_power"
+                outlined
+                :label="$t('energy_unit')"
+                :hint="$t('energy_hint')"
+                dense
+                persistent-hint
+              ></v-select>
+            </v-col>
+          </v-row>
+          <v-text-field :label="$t('monthly_income')" outlined></v-text-field>
+          <v-text-field :label="$t('daily_income')" outlined></v-text-field>
+        </v-card-text>
+      </v-card>
+      <v-card class="mt-2 mb-2">
+        <v-card-title class="headline">
+          {{ $t('cost_data') }}
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :label="$t('hardware_costs')" outlined></v-text-field>
+          <v-text-field
+            :label="$t('daily_energy_costs')"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            :label="$t('monthly_energy_costs')"
+            outlined
+          ></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
+          <v-btn color="primary" class="mb-2 mr-2">
+            {{ $t('calculate') }}
+          </v-btn>
         </v-card-actions>
+      </v-card>
+      <v-card class="mt-2 mb-2">
+        <v-card-title class="headline">
+          {{ $t('profit_data') }}
+        </v-card-title>
+        <v-card-text>
+          <v-text-field :label="$t('daily_profit')" outlined></v-text-field>
+          <v-text-field :label="$t('monthly_profit')" outlined></v-text-field>
+          <v-text-field :label="$t('payoff_time')" outlined></v-text-field>
+        </v-card-text>
+      </v-card>
+      <v-card class="mt-2">
+        <v-card-title class="headline">
+          {{ $t('support') }}
+        </v-card-title>
+        <v-card-text>
+          {{ $t('support_text') }}
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo,
-  },
+  components: {},
+  data: () => ({
+    dropdown_power: ['Watt', 'kWh'],
+  }),
 }
 </script>
+
+<style lang="scss">
+html {
+  overflow: hidden !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+</style>
