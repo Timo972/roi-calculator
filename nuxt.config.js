@@ -6,7 +6,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Profit Calculator',
+    titleTemplate: '%s - Profit calculator',
     title: 'Return of invest calculator',
     htmlAttrs: {
       lang: 'en',
