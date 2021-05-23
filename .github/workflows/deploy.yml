@@ -1,0 +1,119 @@
+name: Deploy
+
+on:
+  create:
+    tags:
+      - 'release/*'
+
+jobs:
+  build:
+    name: Build & Upload
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci
+
+      - name: Run build ⚠
+        run: npm run build
+
+      - name: Upload built script
+        uses: actions/upload-artifact@v2
+        with:
+          name: roi-build
+          path: |
+            dist
+            package.json
+            package-lock.json
+
+          if-no-files-found: error
+
+  #deploy-gh:
+  #  name: Deploy Github Pages
+  #  needs: [build]
+#
+#  runs-on: ${{ matrix.os }}
+#
+#  strategy:
+#    matrix:
+#      os: [ubuntu-latest]
+#      node: [14]
+#
+#  steps:
+#    - name: Download build
+#      uses: actions/download-artifact@v2
+#      with:
+#        name: roi-build
+#
+#    - name: Deploy
+#      uses: peaceiris/actions-gh-pages@v3
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        publish_dir: ./dist
+#
+#deploy-akash:
+#  name: Deploy Akash Network
+#  needs: [build]
+#
+#  runs-on: ${{ matrix.os }}
+#
+#  strategy:
+#    matrix:
+#      os: [ubuntu-latest]
+#      node: [14]
+#
+#  steps:
+#    - name: Download build
+#      uses: actions/download-artifact@v2
+#      with:
+#        name: roi-build
+#
+#    - name: Select Akash Network
+#      #AKASH_ACCOUNT_ADDRESS is secrets.AKASH_ACCOUNT_ADDRESS
+#      run: |
+#        AKASH_NET="https://raw.githubusercontent.com/ovrclk/net/master/testnet"
+#        AKASH_VERSION="${(curl -s "${AKASH_NET}/version.txt")}"
+#        AKASH_CHAIN_ID="$(curl -s "$AKASH_NET/chain-id.txt")"
+#        AKASH_NODE="$(curl -s "$AKASH_NET/rpc-nodes.txt" | shuf -n 1)"
+#        echo ::set-output name=AKASH_NET::${AKASH_NET}
+#        echo ::set-output name=AKASH_VERSION::${}
+#
+#    - name: Check Akash Balance
+#      run:
+#
+#    - name: Set address to akash.yml
+#      run:
+#
+#    - name: Deploy to Network
+#      run: |
+#        ./bin/akash tx deployment create akash.yml --from ${AKASH_KEY_NAME} --node ${AKASH_NODE} --chain-id ${AKASH_CHAIN_ID} --fees 5000uakt -y
+#        echo ::set-output name=AKASH_DSEQ::${}
+#        echo ::set-output name=AKASH_OSEQ::${}
+#        echo ::set-output name=AKASH_GSEQ::${}
+#
+#    - name: Check deployment
+#      run: ./bin/akash query deployment get --owner ${secrets.AKASH_ACCOUNT_ADDRESS} --node ${AKASH_NODE} --dseq ${AKASH_DSEQ}
+
