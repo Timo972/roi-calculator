@@ -52,6 +52,7 @@
           :label="$t('language')"
           dense
           hide-details
+          :value="language"
           @input="set_language"
         ></v-select
       ></v-col>
@@ -130,6 +131,7 @@ export default {
   },
   created() {
     this.$vuetify.theme.dark = this.darkmode
+    this.$i18n.locale = this.language
   },
   methods: {
     toggle_darkmode(darkmode) {
