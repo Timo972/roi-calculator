@@ -92,6 +92,8 @@ export default {
           language: 'Language',
           en: 'English',
           de: 'German',
+          support: 'Support this page',
+          support_text: `Consider donating to support future development of the site.\n ETH: xyz`,
         },
         de: {
           power_data: 'Stromverbrauch und Einkommen',
@@ -112,6 +114,8 @@ export default {
           language: 'Sprache',
           en: 'Englisch',
           de: 'Deutsch',
+          support: 'Unterstütze dieses Projekt',
+          support_text: `Um die Weiterentwicklung zu unterstützen kannst du Ethereum spenden: xyz`,
         },
       },
     },
