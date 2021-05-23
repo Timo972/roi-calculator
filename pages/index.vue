@@ -1,7 +1,6 @@
 <template>
   <v-row justify="center" align="center">
-    <!-- xs="1" sm="12" md="8" lg="7" xl="6" -->
-    <v-col cols="12" sm="11" md="9" lg="7" xl="6">
+    <v-col cols="12" sm="11" md="9" lg="7" xl="6" class="scroll">
       <v-card class="mb-2" outlined>
         <v-card-title class="headline">
           {{ $t('power_data') }}
@@ -228,5 +227,17 @@ html {
 html::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+.scroll {
+  overflow-y: scroll !important;
+  scrollbar-width: 1px;
+  -ms-overflow-style: scrollbar;
+  max-height: calc(100vh - 66px);
+}
+
+.scroll::-webkit-scrollbar {
+  width: 1px;
+  height: 100%;
 }
 </style>
